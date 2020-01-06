@@ -1,0 +1,20 @@
+# Milestone-3 Test 2 
+    - Let node count be 10
+    - let chunk size be 1 KB
+    - let redunduncy count be 1
+    - upload a 10 KB file
+    - now each node must contain 2 files ( 1 original and 1 redundant copy )
+    - upload a 2 KB file 
+    - upload a 2 KB file 
+    - now , all nodes must have file count<3
+
+#Milestone-3 Test 4
+    - Let node count be 10
+    - let chunk size be 1 KB
+    - let redunduncy count be 1
+    - upload a 10 KB file
+    - now each node must contain 2 files ( 1 original and 1 redundant copy )
+    - Delete 1 node ( prefereably the first node ) 
+    - now try to retrive the file
+    - Verify the checksum of the file
+    
