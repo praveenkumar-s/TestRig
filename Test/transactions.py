@@ -9,12 +9,12 @@ test_configs = Objectifier(json.load(open('Test/testconfig.json')))
 
 def upload_a_file(file):
     files = {'file': open(file, 'rb')}
-    rs = requests.put(url=test_configs.API_SERVER_URL+'/upload', files=files)
+    rs = requests.put(url=test_configs.API_SERVER_URL+'/files', files=files , verify=False)
     return rs
 
 
 def retrive_a_file_by_id(id):
-    rs = requests.get(url=test_configs.API_SERVER_URL+'/upload/{id}'.format(id = id), allow_redirects = True)
+    rs = requests.get(url=test_configs.API_SERVER_URL+'/files/{id}'.format(id = id), allow_redirects = True, verify=False)
     return rs
 
 
@@ -23,12 +23,12 @@ def reterive_a_file_by_name(name):
 
 
 def list_available_files():
-    rs = requests.get(url=test_configs.API_SERVER_URL+'/upload/list')
+    rs = requests.get(url=test_configs.API_SERVER_URL+'/files/list', verify=False)
     return rs
 
 
 def delete_a_file_by_id(id):
-    rs = requests.delete(url=test_configs.API_SERVER_URL+'/upload/{id}'.format(id = id))
+    rs = requests.delete(url=test_configs.API_SERVER_URL+'/files/{id}'.format(id = id), verify=False)
     return rs
 
 
