@@ -48,3 +48,9 @@ def rename_folder(source_dir, new_name):
 def is_slice_in_list(s,l):
         len_s = len(s) #so we don't recompute length of s on every iteration
         return any(s == l[i:len_s+i] for i in range(len(l) - len_s+1))
+
+def upload_result(result):
+    try:
+        requests.post(url = test_configs.result_url+'/addresult', json = result, verify = False)
+    except:
+        pass

@@ -48,6 +48,7 @@ class TestSanityCases():
         try:
             download_response = txn.reterive_a_file_by_name(config.TEST_DATA.sanity_test.file_name)
             assert(download_response.status_code ==200 )#, "status code 200 was required during downlod, but got {0}".format(download_response.status_code))
+            self.status = 'Pass'
         except Exception as e:
             self.status = 'Fail'
             raise e
@@ -60,15 +61,18 @@ class TestSanityCases():
         try:
             delete_response = txn.delete_a_file_by_name(config.TEST_DATA.sanity_test.file_name)
             assert(delete_response.status_code ==200 )#, "delete operation must return status code 200, but recieved {0}".format(delete_response.status_code))
+            self.status = 'Pass'
         except Exception as e:
             self.status = 'Fail'
             raise e
 
     def teardown_method(self):
+        result = {'rollNumber':os.environ.get('ROLL_NUM'), 'testSuite':self.test_suite_name,
+            'testCase':self.test_name.replace('\n','').strip() ,
+            'status':self.status, 'ranAt':str(datetime.now()), 'hostName':socket.gethostname()}
         with open(r'Results/ResultStore.csv', 'a', newline='') as csvfile:
-            fieldnames = ['Roll_number','Suite','TestCase','Status', 'Ran_at', 'Host_name']
+            fieldnames = ['rollNumber','testSuite','testCase','status', 'ranAt', 'hostName']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writerow({'Roll_number':os.environ.get('ROLL_NUM'), 'Suite':self.test_suite_name,
-            'TestCase':self.test_name.replace('\n','') ,
-            'Status':self.status, 'Ran_at':str(datetime.now()), 'Host_name':socket.gethostname()})
+            writer.writerow(result)
+        txn.upload_result(result)
         

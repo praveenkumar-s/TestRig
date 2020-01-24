@@ -1,0 +1,28 @@
+SDRG11001,Sanity,        Verify that Upload of a file works fine        ,Fail,2020-01-24 21:59:26.512154,PRSUBRAMA-LT
+SDRG11001,Sanity,        Verify that list operation of files works fine        ,Fail,2020-01-24 21:59:29.899613,PRSUBRAMA-LT
+SDRG11001,Sanity,        Verify that Download of a file works fine        ,Fail,2020-01-24 21:59:33.295370,PRSUBRAMA-LT
+SDRG11001,Sanity,        Verify that delete operation works fine        ,Fail,2020-01-24 21:59:36.683310,PRSUBRAMA-LT
+SDRG11001,Sanity,        Verify that Upload of a file works fine        ,Pass,2020-01-24 22:00:04.436634,PRSUBRAMA-LT
+SDRG11001,Sanity,        Verify that list operation of files works fine        ,Pass,2020-01-24 22:00:07.628771,PRSUBRAMA-LT
+SDRG11001,Sanity,        Verify that Download of a file works fine        ,Fail,2020-01-24 22:00:10.111795,PRSUBRAMA-LT
+SDRG11001,Sanity,        Verify that delete operation works fine        ,Fail,2020-01-24 22:00:12.428977,PRSUBRAMA-LT
+SDRG11002,Sanity,        Verify that Upload of a file works fine        ,Pass,2020-01-24 22:03:17.398515,PRSUBRAMA-LT
+SDRG11002,Sanity,        Verify that list operation of files works fine        ,Pass,2020-01-24 22:03:19.873684,PRSUBRAMA-LT
+SDRG11002,Sanity,        Verify that Download of a file works fine        ,Pass,2020-01-24 22:03:22.330065,PRSUBRAMA-LT
+SDRG11002,Sanity,        Verify that delete operation works fine        ,Pass,2020-01-24 22:03:24.566428,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Delete all the files on the server,Pass,2020-01-24 22:13:53.262735,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that the list Files returns no files when there are no files to be displayed,Pass,2020-01-24 22:13:55.586033,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that the a file can be uploaded successfully,Pass,2020-01-24 22:13:58.088692,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that the uploaded file can be reterived sucessfully - Verify check sum before upload and after reterive,Pass,2020-01-24 22:14:01.482561,PRSUBRAMA-LT
+SDRG11002,Milestone-1,"Verify that when there are files , the list call displays the files correctly",Pass,2020-01-24 22:14:03.593462,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that a delete operation happens successfully,Pass,2020-01-24 22:14:10.143403,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that appopriate error message is displayed while trying to access a file that doesnt exist,Pass,2020-01-24 22:14:12.573083,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that a file can be retrived by name,Pass,2020-01-24 22:14:15.963847,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that a file can be deleted by name,Pass,2020-01-24 22:14:19.263260,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that an error is returned while trying to upload a duplicate file,Pass,2020-01-24 22:14:22.716987,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that files of various names are accepted during upload,Pass,2020-01-24 22:14:29.334943,PRSUBRAMA-LT
+SDRG11002,Milestone-1,Verify that 404 is returned while trying to delete a file that does not exist,Pass,2020-01-24 22:14:33.720159,PRSUBRAMA-LT
+SDRG11002,Milestone-3,Delete all the files on the server,Pass,2020-01-24 22:23:23.906284,PRSUBRAMA-LT
+SDRG11002,Milestone-3,Verify Load Balancing        - Have a known configuration of node count and chunk size        - Load a sequence of files with specific sizes        - Check the file count and distribution of load,Pass,2020-01-24 22:23:50.099827,PRSUBRAMA-LT
+SDRG11002,Milestone-3,Delete all the files on the server,Pass,2020-01-24 22:23:55.811683,PRSUBRAMA-LT
+SDRG11002,Milestone-3,"Verify redundancy         - Have a known configuration of node count , chunk size  and redunduncy level        - Load a sequence of files with specific sizes        - Delete number of nodes as redunduncy specification        - Check if the files can be retrived",Pass,2020-01-24 22:23:59.608828,PRSUBRAMA-LT
