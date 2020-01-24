@@ -113,7 +113,9 @@ class TestMilestone3():
                 nodes.append(items)
         
         # delete a node
-        shutil.rmtree( os.path.join( config.TEST_DATA.milestone_3.location_of_nodes , nodes[0]) )
+        #shutil.rmtree( os.path.join( config.TEST_DATA.milestone_3.location_of_nodes , nodes[0]) )
+        #rename a file 
+        os.rename(os.path.join( config.TEST_DATA.milestone_3.location_of_nodes , nodes[0]) , os.path.join( config.TEST_DATA.milestone_3.location_of_nodes , 'XYZQBC'))
 
         # try getting the file back 
         rs = txn.retrive_a_file_by_id(file_id)
