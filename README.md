@@ -7,7 +7,7 @@ Validator Test Rig
   
   Example:
   
-  `RunValidation.exe -e http://127.0.0.1:5000 -t sanity`
+  `RunValidation.exe -e http://127.0.0.1:5000 -t sanity -r your_roll_number`
   
   note: do not put a trailing "/" after the url 
  
