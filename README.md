@@ -69,3 +69,5 @@ Validator Test Rig
 }```
 
  Make sure to update the *app_config_location* and *location_of_nodes* in the config file
+
+Note2: make sure VC Redist is installed in the machine where the exe us built https://support.microsoft.com/en-au/help/2977003/the-latest-supported-visual-c-downloads
