@@ -232,7 +232,7 @@ class TestMilestone1():
         result = {'rollNumber':os.environ.get('ROLL_NUM'), 'testSuite':self.test_suite_name,
             'testCase':self.test_name.replace('\n','').strip() ,
             'status':self.status, 'ranAt':str(datetime.now()), 'hostName':socket.gethostname()}
-        with open(r'Results/ResultStore.csv', 'a', newline='') as csvfile:
+        with open(r'Results/ResultStore.csv', 'a') as csvfile:
             fieldnames = ['rollNumber','testSuite','testCase','status', 'ranAt', 'hostName']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow(result)

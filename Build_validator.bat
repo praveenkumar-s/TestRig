@@ -1,1 +1,1 @@
-pyinstaller .\RunValidation.py -F --hidden-import objectifier --hidden-import requests --hidden-import filehash
+pyinstaller .\RunValidation.py -F --hidden-import objectifier --hidden-import requests --hidden-import filehash --hidden-import csv
