@@ -133,42 +133,42 @@ class TestMilestone1():
             self.status = 'Fail'
             raise e
 
-    # Verify that a file can be retrived by name
-    def test_eight(self):
-        """
-        Verify that a file can be retrived by name
-        """
-        self.test_name = self.test_eight.__doc__        
-        try:
-            md5= FileHash('sha1')
-            hash = md5.hash_file(config.TEST_DATA.test_eight.file_to_upload)
-            response = txn.upload_a_file(config.TEST_DATA.test_eight.file_to_upload)
-            assert(response.status_code==200)
-            rs = txn.reterive_a_file_by_name(config.TEST_DATA.test_eight.file_name)
-            assert(rs.status_code==200)
-            open(config.TEST_DATA.test_eight.file_name, 'wb+').write(rs.content)
-            hash_2 = md5.hash_file(config.TEST_DATA.test_eight.file_name)
-            assert(hash==hash_2)
-            self.status = 'Pass'
-        except Exception as e:
-            self.status = 'Fail'
-            raise e
+    # # Verify that a file can be retrived by name
+    # def test_eight(self):
+    #     """
+    #     Verify that a file can be retrived by name
+    #     """
+    #     self.test_name = self.test_eight.__doc__        
+    #     try:
+    #         md5= FileHash('sha1')
+    #         hash = md5.hash_file(config.TEST_DATA.test_eight.file_to_upload)
+    #         response = txn.upload_a_file(config.TEST_DATA.test_eight.file_to_upload)
+    #         assert(response.status_code==200)
+    #         rs = txn.reterive_a_file_by_name(config.TEST_DATA.test_eight.file_name)
+    #         assert(rs.status_code==200)
+    #         open(config.TEST_DATA.test_eight.file_name, 'wb+').write(rs.content)
+    #         hash_2 = md5.hash_file(config.TEST_DATA.test_eight.file_name)
+    #         assert(hash==hash_2)
+    #         self.status = 'Pass'
+    #     except Exception as e:
+    #         self.status = 'Fail'
+    #         raise e
 
-    # Verify that a file can be deleted by name
-    def test_nine(self):
-        """
-        Verify that a file can be deleted by name
-        """
-        self.test_name = self.test_nine.__doc__        
-        try:
-            response = txn.upload_a_file(config.TEST_DATA.test_nine.file_to_upload)
-            assert(response.status_code==200)
-            rs = txn.delete_a_file_by_name(config.TEST_DATA.test_nine.file_name)
-            assert(rs.status_code==200)
-            self.status = 'Pass'
-        except Exception as e:
-            self.status = 'Fail'
-            raise e
+    # # Verify that a file can be deleted by name
+    # def test_nine(self):
+    #     """
+    #     Verify that a file can be deleted by name
+    #     """
+    #     self.test_name = self.test_nine.__doc__        
+    #     try:
+    #         response = txn.upload_a_file(config.TEST_DATA.test_nine.file_to_upload)
+    #         assert(response.status_code==200)
+    #         rs = txn.delete_a_file_by_name(config.TEST_DATA.test_nine.file_name)
+    #         assert(rs.status_code==200)
+    #         self.status = 'Pass'
+    #     except Exception as e:
+    #         self.status = 'Fail'
+    #         raise e
     
     # Verify that an error is returned while trying to upload a duplicate file
     def test_ten(self):

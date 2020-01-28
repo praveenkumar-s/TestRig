@@ -9,6 +9,7 @@ import socket
 
 config = Objectifier(json.load(open('Test/testconfig.json')))
 
+
 class TestSanityCases():
     def setup_method(self):
         self.test_suite_name = 'Sanity'
@@ -18,10 +19,13 @@ class TestSanityCases():
         """
         Verify that Upload of a file works fine
         """
-        self.test_name = self.test_Upload.__doc__        
+        self.test_name = self.test_Upload.__doc__
         try:
-            upload_response = txn.upload_a_file(config.TEST_DATA.sanity_test.file_to_upload)
-            assert(upload_response.status_code in [200,201])#, "status code 200 was expected , recieved {0}".format(upload_response.status_code))
+            upload_response = txn.upload_a_file(
+                config.TEST_DATA.sanity_test.file_to_upload)
+            # , "status code 200 was expected , recieved {0}".format(upload_response.status_code))
+            assert(upload_response.status_code in [200, 201])
+            os.environ['sanity_file_name'] = upload_response.text
             self.status = 'Pass'
         except Exception as e:
             self.status = 'Fail'
@@ -31,10 +35,11 @@ class TestSanityCases():
         """
         Verify that list operation of files works fine
         """
-        self.test_name = self.test_list.__doc__        
+        self.test_name = self.test_list.__doc__
         try:
             list_response = txn.list_available_files()
-            assert(config.TEST_DATA.sanity_test.file_name in list_response.text)#, "The uploaded file was not listed on the /upload/list route")
+            # , "The uploaded file was not listed on the /upload/list route")
+            assert(config.TEST_DATA.sanity_test.file_name in list_response.text)
             self.status = 'Pass'
         except Exception as e:
             self.status = 'Fail'
@@ -46,8 +51,9 @@ class TestSanityCases():
         """
         self.test_name = self.test_download.__doc__
         try:
-            download_response = txn.reterive_a_file_by_name(config.TEST_DATA.sanity_test.file_name)
-            assert(download_response.status_code ==200 )#, "status code 200 was required during downlod, but got {0}".format(download_response.status_code))
+            download_response = txn.retrive_a_file_by_id(os.environ['sanity_file_name'])
+            # , "status code 200 was required during downlod, but got {0}".format(download_response.status_code))
+            assert(download_response.status_code == 200)
             self.status = 'Pass'
         except Exception as e:
             self.status = 'Fail'
@@ -59,20 +65,21 @@ class TestSanityCases():
         """
         self.test_name = self.test_delete.__doc__
         try:
-            delete_response = txn.delete_a_file_by_name(config.TEST_DATA.sanity_test.file_name)
-            assert(delete_response.status_code ==200 )#, "delete operation must return status code 200, but recieved {0}".format(delete_response.status_code))
+            delete_response = txn.delete_a_file_by_id(os.environ['sanity_file_name'])
+            # , "delete operation must return status code 200, but recieved {0}".format(delete_response.status_code))
+            assert(delete_response.status_code == 200)
             self.status = 'Pass'
         except Exception as e:
             self.status = 'Fail'
             raise e
 
     def teardown_method(self):
-        result = {'rollNumber':os.environ.get('ROLL_NUM'), 'testSuite':self.test_suite_name,
-            'testCase':self.test_name.replace('\n','').strip() ,
-            'status':self.status, 'ranAt':str(datetime.now()), 'hostName':socket.gethostname()}
+        result = {'rollNumber': os.environ.get('ROLL_NUM'), 'testSuite': self.test_suite_name,
+                  'testCase': self.test_name.replace('\n', '').strip(),
+                  'status': self.status, 'ranAt': str(datetime.now()), 'hostName': socket.gethostname()}
         with open(r'Results/ResultStore.csv', 'a') as csvfile:
-            fieldnames = ['rollNumber','testSuite','testCase','status', 'ranAt', 'hostName']
+            fieldnames = ['rollNumber', 'testSuite',
+                          'testCase', 'status', 'ranAt', 'hostName']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow(result)
         txn.upload_result(result)
-        
