@@ -3,7 +3,7 @@ Validator Test Rig
 ## Usage: 
   To use the Validator as an standalone executable, Navigate to the root directory of this project and call 
   
-  ` RunValidation.exe -e <endpoint url> -t <sanity/milestone1/milestone3>`
+  ` RunValidation.exe -e <endpoint url> -t <sanity/milestone1/milestone3> -r <your roll number | name >`
   
   Example:
   
