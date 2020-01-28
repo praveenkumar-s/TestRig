@@ -18,10 +18,11 @@ class TestSanityCases():
         """
         Verify that Upload of a file works fine
         """
-        self.test_name = self.test_Upload.__doc__        
+        self.test_name = self.test_Upload.__doc__  
         try:
             upload_response = txn.upload_a_file(config.TEST_DATA.sanity_test.file_to_upload)
             assert(upload_response.status_code in [200,201])#, "status code 200 was expected , recieved {0}".format(upload_response.status_code))
+            os.environ['sanity_file_id'] = upload_response.text
             self.status = 'Pass'
         except Exception as e:
             self.status = 'Fail'
@@ -45,8 +46,8 @@ class TestSanityCases():
         Verify that Download of a file works fine
         """
         self.test_name = self.test_download.__doc__
-        try:
-            download_response = txn.reterive_a_file_by_name(config.TEST_DATA.sanity_test.file_name)
+        try:            
+            download_response = txn.retrive_a_file_by_id(os.environ['sanity_file_id'])
             assert(download_response.status_code ==200 )#, "status code 200 was required during downlod, but got {0}".format(download_response.status_code))
             self.status = 'Pass'
         except Exception as e:
@@ -59,7 +60,7 @@ class TestSanityCases():
         """
         self.test_name = self.test_delete.__doc__
         try:
-            delete_response = txn.delete_a_file_by_name(config.TEST_DATA.sanity_test.file_name)
+            delete_response = txn.delete_a_file_by_id(os.environ['sanity_file_id'])
             assert(delete_response.status_code ==200 )#, "delete operation must return status code 200, but recieved {0}".format(delete_response.status_code))
             self.status = 'Pass'
         except Exception as e:
