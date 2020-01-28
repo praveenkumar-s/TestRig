@@ -21,7 +21,7 @@ class TestMilestone3():
 
     def test_one(self):
         """
-            Delete all the files on the server
+            Delete all the files on the server_M3
         """
         self.test_name = self.test_one.__doc__        
         try:
@@ -98,7 +98,7 @@ class TestMilestone3():
 
     def test_three(self):
         """
-            Delete all the files on the server
+            Delete all the files on the server_M34
         """
         self.test_name = self.test_three.__doc__        
         try:
