@@ -16,6 +16,9 @@ class TestMilestone1():
     def setup_method(self):
         self.test_suite_name = 'Milestone-1'
         self.status = 'Fail'
+        self.status = 'Fail'
+        md5= FileHash('sha1')
+        self.chksum = md5.hash_file('Test/Milestone1Tests.py')
 
     #envsetup
     def test_one(self):
@@ -229,7 +232,7 @@ class TestMilestone1():
             raise e
 
     def teardown_method(self):
-        result = {'rollNumber':os.environ.get('ROLL_NUM'), 'testSuite':self.test_suite_name,
+        result = {'rollNumber':os.environ.get('ROLL_NUM'), 'testSuite':self.test_suite_name+'__'+self.chksum,
             'testCase':self.test_name.replace('\n','').strip() ,
             'status':self.status, 'ranAt':str(datetime.now()), 'hostName':socket.gethostname()}
         with open(r'Results/ResultStore.csv', 'a') as csvfile:

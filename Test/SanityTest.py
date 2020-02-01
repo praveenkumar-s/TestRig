@@ -6,6 +6,7 @@ import csv
 from datetime import datetime
 import os
 import socket
+from filehash import FileHash
 
 config = Objectifier(json.load(open('Test/testconfig.json')))
 
@@ -14,7 +15,10 @@ class TestSanityCases():
     def setup_method(self):
         self.test_suite_name = 'Sanity'
         self.status = 'Fail'
-
+        md5= FileHash('sha1')
+        self.chksum = md5.hash_file('Test/SanityTest.py')
+        
+        
     def test_Upload(self):
         """
         Verify that Upload of a file works fine
@@ -74,7 +78,7 @@ class TestSanityCases():
             raise e
 
     def teardown_method(self):
-        result = {'rollNumber': os.environ.get('ROLL_NUM'), 'testSuite': self.test_suite_name,
+        result = {'rollNumber': os.environ.get('ROLL_NUM'), 'testSuite': self.test_suite_name+'__'+self.chksum,
                   'testCase': self.test_name.replace('\n', '').strip(),
                   'status': self.status, 'ranAt': str(datetime.now()), 'hostName': socket.gethostname()}
         with open(r'Results/ResultStore.csv', 'a') as csvfile:
