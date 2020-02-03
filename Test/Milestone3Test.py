@@ -167,7 +167,7 @@ class TestMilestone3():
                   'status': self.status, 'ranAt': str(datetime.now()), 'hostName': socket.gethostname(),'checksum':self.chksum , 'metaData':"",'testID':str(config.testID)}
         with open(r'Results/ResultStore.csv', 'a') as csvfile:
             fieldnames = ['rollNumber', 'testSuite',
-                          'testCase', 'status', 'ranAt', 'hostName', 'checksum','metadata','testID']
+                          'testCase', 'status', 'ranAt', 'hostName', 'checksum','metaData','testID']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow(result)
         txn.upload_result(result)
