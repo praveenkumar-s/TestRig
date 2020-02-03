@@ -78,12 +78,12 @@ class TestSanityCases():
             raise e
 
     def teardown_method(self):
-        result = {'rollNumber': os.environ.get('ROLL_NUM'), 'testSuite': self.test_suite_name+'__'+self.chksum,
+        result = {'rollNumber': os.environ.get('ROLL_NUM'), 'testSuite': self.test_suite_name,
                   'testCase': self.test_name.replace('\n', '').strip(),
-                  'status': self.status, 'ranAt': str(datetime.now()), 'hostName': socket.gethostname()}
+                  'status': self.status, 'ranAt': str(datetime.now()), 'hostName': socket.gethostname(),'checksum':self.chksum , 'metaData':"",'testID':str(config.testID)}
         with open(r'Results/ResultStore.csv', 'a') as csvfile:
             fieldnames = ['rollNumber', 'testSuite',
-                          'testCase', 'status', 'ranAt', 'hostName']
+                          'testCase', 'status', 'ranAt', 'hostName', 'checksum','metadata','testID']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow(result)
         txn.upload_result(result)
