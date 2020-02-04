@@ -18,13 +18,16 @@ for i in range(1,arguments.__len__()):
         roll_number = arguments[i+1]
 ######################
 os.environ['ROLL_NUM']=str(roll_number)
+os.environ['ACTIVE_TEST']=""
+os.environ['test_selector']=test_suite
 #update arguments to config
 test_config_data = json.load(open('Test/testconfig.json'))
 test_config_data['API_SERVER_URL']=endpoint
 json.dump(test_config_data , open('Test/testconfig.json','w+'))
-if(test_suite in ['sanity','milestone1']):
+if(test_suite in ['sanity','milestone1','milestone1b']):
     pytest.main([test_config_data[test_suite] , '-s' , '-v'])
 elif(test_suite == 'milestone3'):
+    os.environ['ACTIVE_TEST']="MI_3"
     pytest.main([test_config_data['milestone1'] , '-s' , '-v'])
     pytest.main([test_config_data['milestone3'] , '-s' , '-v'])
 else:

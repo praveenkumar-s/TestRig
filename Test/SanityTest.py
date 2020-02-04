@@ -13,7 +13,7 @@ config = Objectifier(json.load(open('Test/testconfig.json')))
 
 class TestSanityCases():
     def setup_method(self):
-        self.test_suite_name = 'Sanity'
+        self.test_suite_name = os.environ['test_selector']
         self.status = 'Fail'
         md5= FileHash('sha1')
         self.chksum = md5.hash_file('Test/SanityTest.py')

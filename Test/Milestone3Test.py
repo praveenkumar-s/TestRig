@@ -16,11 +16,12 @@ config = Objectifier(json.load(open('Test/testconfig.json')))
 class TestMilestone3():
 
     def setup_method(self):
-        self.test_suite_name = 'Milestone-3'
+        self.test_suite_name = os.environ['test_selector']
         self.status = 'Fail'
         self.status = 'Fail'
         md5= FileHash('sha1')
         self.chksum = md5.hash_file('Test/Milestone3Test.py')
+
 
     def test_one(self):
         """
@@ -51,7 +52,7 @@ class TestMilestone3():
             size_per_slice = app_config['size_per_slice']
             redunduncy_count = app_config['redundancy_count']
             print("\nVerifying Pre-Requisites for the Test")
-            assert(node_count==10)
+            assert(node_count==4)
             assert(size_per_slice==1024)
             assert(redunduncy_count==1)
             print("\nSuccessfully verified Pre-Requisites for the test")
@@ -72,7 +73,7 @@ class TestMilestone3():
             
             # there must not be more than 2 files per node for the given configuration
             for key in file_count_data.keys():
-                assert(file_count_data[key] <= 2)
+                assert(file_count_data[key] <= config.TEST_DATA.milestone_3.test_2_count_1)
             
             #Load 2KB file Twice
             rs = txn.upload_a_file(config.TEST_DATA.milestone_3.file_2_path)
@@ -92,7 +93,29 @@ class TestMilestone3():
             
             # there must not be more than 2 files per node for the given configuration
             for key in file_count_data.keys():
-                assert(file_count_data[key] <= 3)
+                assert(file_count_data[key] <= config.TEST_DATA.milestone_3.test_2_count_2)
+            self.status = 'Pass'
+        except Exception as e:
+            self.status = 'Fail'
+            raise e
+    
+    def test_two_xnd(self):
+        """
+        Verify that chunking is done appropriately
+        """
+        self.test_name = self.test_two_xnd.__doc__ 
+        try:
+            nodes = []
+            for items in os.listdir(config.TEST_DATA.milestone_3.location_of_nodes):
+                if( os.path.isdir(config.TEST_DATA.milestone_3.location_of_nodes+'/'+items) and 'node_' in items):
+                    nodes.append(items)
+            assert(nodes.__len__()>0)
+            for node in nodes:
+                print(node)
+                for dirpath, dirnames, filenames in os.walk(config.TEST_DATA.milestone_3.location_of_nodes+'/'+node):
+                    for f in filenames:
+                        fp = os.path.join(dirpath, f)                                                                    
+                        assert(os.path.getsize(fp)<=1024)
             self.status = 'Pass'
         except Exception as e:
             self.status = 'Fail'
@@ -129,7 +152,7 @@ class TestMilestone3():
             size_per_slice = app_config['size_per_slice']
             redunduncy_count = app_config['redundancy_count']
             print("\nVerifying Pre-Requisites for the Test")
-            assert(node_count==10)
+            assert(node_count==4)
             assert(size_per_slice==1024)
             assert(redunduncy_count==1)
             print("\nSuccessfully verified Pre-Requisites for the test")
