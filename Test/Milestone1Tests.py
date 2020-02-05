@@ -14,7 +14,7 @@ config = Objectifier(json.load(open('Test/testconfig.json')))
 class TestMilestone1():
 
     def setup_method(self):
-        self.test_suite_name = 'Milestone-1'
+        self.test_suite_name = os.environ['test_selector']
         self.status = 'Fail'
         self.status = 'Fail'
         md5= FileHash('sha1')
